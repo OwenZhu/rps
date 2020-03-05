@@ -1,0 +1,1 @@
+g++ ./src/*.cpp -o ./bin/rsp -std=c++11
