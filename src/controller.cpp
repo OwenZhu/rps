@@ -4,6 +4,9 @@
 
 #include "controller.h"
 
+const std::array<std::string, 3> Controller::move_type =
+    {"scissor", "rock", "paper"};
+
 void Controller::start()
 {
     std::cout << "Press any key to start...";
