@@ -4,9 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-const std::array<std::string, 3> Controller::move_type =
-    {"scissor", "rock", "paper"};
-
 void Controller::start()
 {
     std::cout << "Press any key to start...";
@@ -27,8 +24,8 @@ void Controller::start()
 
 Controller::GameState Controller::step(Move move_1, Move move_2)
 {
-    std::cout << "Player 1: " << move_type[move_1] << std::endl;
-    std::cout << "Player 2: " << move_type[move_2] << std::endl;
+    std::cout << "Player 1: " << convert_move_to_str(move_1) << std::endl;
+    std::cout << "Player 2: " << convert_move_to_str(move_2) << std::endl;
 
     switch (move_1 - move_2 % 3)
     {
