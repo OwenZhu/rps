@@ -1,8 +1,8 @@
+#include "controller.h"
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-
-#include "controller.h"
 
 const std::array<std::string, 3> Controller::move_type =
     {"scissor", "rock", "paper"};
@@ -25,19 +25,6 @@ void Controller::start()
     default:
         single_player_mode = true;
         break;
-    }
-}
-
-Move Controller::parse_input(char ch)
-{
-    switch (ch)
-    {
-    case '0':
-        return scissor;
-    case '1':
-        return rock;
-    default:
-        return paper;
     }
 }
 

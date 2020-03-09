@@ -4,22 +4,22 @@
 #include <array>
 #include <string>
 
-enum Move
-{
-    scissor,
-    rock,
-    paper
-};
-
 class Controller
 {
+    enum Move
+    {
+        Scissor,
+        Rock,
+        Paper
+    };
+
 public:
     Controller() : single_player_mode(true), counter(0) {}
     void start();
     void loop();
 
     static int step(Move, Move);
-    static Move parse_input(char);
+    static Move parse_input(char ch) { return Move(ch - '0'); }
 
 private:
     bool single_player_mode;
