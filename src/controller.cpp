@@ -12,41 +12,32 @@ void Controller::start()
     std::cout << "Press any key to start...";
     std::cin.get();
 
-    std::cout << "Select game mode... ｜ 0 single-player mode  ｜ 1 multi-player mode: ";
+    std::cout << "Select game mode... ｜ "
+                 "0 single-player mode  ｜ "
+                 "1 multi-player mode: ";
     char mode;
     std::cin.get(mode);
+    single_player_mode = !bool(mode - '0');
 
-    switch (mode)
+    if (!single_player_mode)
     {
-    case '1':
-        single_player_mode = false;
         std::cout << "Are you kidding me???" << std::endl;
-        break;
-    default:
-        single_player_mode = true;
-        break;
     }
 }
 
-int Controller::step(Move move_1, Move move_2)
+Controller::GameState Controller::step(Move move_1, Move move_2)
 {
-    int tmp = 1;
-    if (move_1 - move_2 == 1 || move_1 - move_2 == -2)
-    {
-        tmp = 2;
-    }
-
     std::cout << "Player 1: " << move_type[move_1] << std::endl;
     std::cout << "Player 2: " << move_type[move_2] << std::endl;
 
-    switch (tmp)
+    switch (move_1 - move_2 % 3)
     {
+    case 0:
+        return Tie;
     case 1:
-        return 1;
-    case 2:
-        return 2;
+        return Win;
     default:
-        return 3;
+        return Lose;
     }
 }
 
@@ -63,24 +54,29 @@ void Controller::loop()
             srand(time(NULL));
             ai_action = char(rand() % 3 + 48);
 
-            std::cout << "---- ROUND " << counter << "----" << std::endl;
+            std::cout << "---- ROUND " << counter << " ----" << std::endl;
             std::cout << "Please input a number from 0 to 2: ";
             std::cin >> action;
 
             game_status = step(parse_input(action),
                                parse_input(ai_action));
 
-            if (game_status == 1)
+            if (game_status == Win)
             {
-                std::cout << "YOU LOSE :(" << std::endl;
+                std::cout << "YOU WIN :D" << std::endl;
+                std::cout << "-----------------" << std::endl;
+                break;
+            }
+            else if (game_status == Tie)
+            {
+                std::cout << "TIE :|" << std::endl;
                 continue;
             }
             else
             {
-                std::cout << "YOU WIN :D" << std::endl;
-                break;
+                std::cout << "YOU LOSE :(" << std::endl;
+                continue;
             }
-            std::cout << "---------------------------" << std::endl;
         }
     }
 }

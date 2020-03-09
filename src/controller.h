@@ -13,12 +13,19 @@ class Controller
         Paper
     };
 
+    enum GameState
+    {
+        Lose,
+        Win,
+        Tie
+    };
+
 public:
     Controller() : single_player_mode(true), counter(0) {}
     void start();
     void loop();
 
-    static int step(Move, Move);
+    static GameState step(Move, Move);
     static Move parse_input(char ch) { return Move(ch - '0'); }
 
 private:
