@@ -58,8 +58,8 @@ void Controller::loop()
             std::cout << "Please input a number from 0 to 2: ";
             std::cin >> action;
 
-            game_status = step(parse_input(action),
-                               parse_input(ai_action));
+            game_status = step(convert_ch_to_move(action),
+                               convert_ch_to_move(ai_action));
 
             if (game_status == Win)
             {

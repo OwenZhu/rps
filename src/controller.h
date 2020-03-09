@@ -26,7 +26,7 @@ public:
     void loop();
 
     static GameState step(Move, Move);
-    static Move parse_input(char ch) { return Move(ch - '0'); }
+    static Move convert_ch_to_move(char ch) { return Move(ch - '0'); }
 
 private:
     bool single_player_mode;
